@@ -1,0 +1,17 @@
+{
+    "name": "comentaae-ssr",
+    "version": "1.0.0",
+    "description": "Rede social de fofocas locais - Módulo SSR",
+    "main": "server-ssr.js",
+    "scripts": {
+        "start": "node server-ssr.js",
+        "dev": "nodemon server-ssr.js"
+    },
+    "dependencies": {
+        "express": "^4.18.2",
+        "mysql2": "^3.9.2",
+        "redis": "^4.6.13",
+        "hbs": "^4.2.0",
+        "dotenv": "^16.4.5"
+    }
+}

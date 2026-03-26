@@ -1,0 +1,13 @@
+# Dependências do Node (muito pesadas, baixamos via npm install)
+node_modules/
+npm-debug.log*
+
+# Variáveis de Ambiente (Senhas e Chaves Secretas)
+.env
+
+# Logs do Sistema
+logs
+*.log
+
+# Arquivos do Docker que não precisam subir
+.docker-compose.override.yml
