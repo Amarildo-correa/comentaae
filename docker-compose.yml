@@ -1,42 +1,31 @@
+version: '3.8'
+
 services:
-  # O Porteiro (Nginx)
-  nginx:
-    image: nginx:alpine
-    container_name: comentaae_nginx
-    ports:
-      - "80:80"
-    volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf:ro
-    depends_on:
-      - app_ssr
-    restart: always
-
-  # Módulo SSR
-  app_ssr:
-    build: .
-    container_name: comentaae_ssr
-    # Note: Removi a porta 3001 daqui para ela não ficar exposta na internet
-    environment:
-      - NODE_ENV=production
-      - PORT=3001
-    restart: always
-
-  # Banco de Dados
+  # 🗄️ O Banco de Dados (MySQL)
   db:
     image: mysql:8.0
-    container_name: comentaae_db
+    container_name: mysql_comentaae
+    restart: always
     environment:
+      MYSQL_ROOT_PASSWORD: )Sc4WS@%hX?y!{]u
       MYSQL_DATABASE: db_comentaae
-      MYSQL_ROOT_PASSWORD: senha_mestre_comentaae
+    ports:
+      - "3306:3306"
     volumes:
-      - comentaae_db_data:/var/lib/mysql
-    restart: always
+      - db_data:/var/lib/mysql
 
-  # Cache
-  redis:
-    image: redis:alpine
-    container_name: comentaae_redis
+  # 🚀 O seu App Node.js (Comentaaê)
+  app:
+    build: .
+    container_name: app_comentaae
     restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
 
+# 💾 Volume para os dados
 volumes:
-  comentaae_db_data:
+  db_data:
+
+
